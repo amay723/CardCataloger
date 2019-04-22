@@ -35,7 +35,7 @@ router.get('/all', function(req, res) {
 
 });
 
-// View the company for the given id
+// View the set for the given id
 router.get('/', function(req, res){
     if(req.query.Set_ID == null) {
         res.send('Set_ID is null');
@@ -56,16 +56,13 @@ router.get('/', function(req, res){
 });
 
 
-// Return the add a new company form
+// Return the add a new set form
 router.get('/add', function(req, res){
-    // passing all the query parameters (req.query) to the insert function instead of each individually
 
     res.render('sets/setsAdd', {'result': res });
 
 });
 
-
-// View the company for the given id
 router.post('/insert', function(req, res) {
     // simple validation
     if (req.body.Set_ID == "") {
@@ -75,7 +72,6 @@ router.post('/insert', function(req, res) {
         res.send('Set_Name must be provided.');
     }
     else {
-        // passing all the query parameters (req.body) to the insert function instead of each individually
         sets_dal.insert(req.body, function(err,result) {
             if (err) {
                 console.log(err);
@@ -97,64 +93,6 @@ router.post('/insert', function(req, res) {
             }
         });
     }
-});
-
-router.get('/decAmt', function( req, res ) {
-
-    if( req.query.Card_ID == null ) {
-        res.send('Card_ID is null');
-    }
-    else {
-        have_dal.decAmt( req.query.Card_ID, function( err, resh ) {
-
-            have_dal.getAll(function(err, result){
-                if(err) {
-                    res.send(err);
-                }
-                else {
-                    res.render('have/haveViewAll', { 'result':result, 'hash': req.query.Card_ID });
-                }
-            });
-
-        });
-    }
-});
-
-router.get('/incAmt', function( req, res ) {
-
-    if( req.query.Card_ID == null ) {
-        res.send('Card_ID is null');
-    }
-    else {
-        have_dal.incAmt( req.query.Card_ID, function( err, resh ) {
-
-            have_dal.getAll(function(err, result){
-                if(err) {
-                    res.send(err);
-                }
-                else {
-                    res.render('have/haveViewAll', { 'result':result, 'hash': req.query.Card_ID });
-                }
-            });
-
-        });
-    }
-});
-
-router.get('/avgscore', function( req, res ) {
-
-    movie_dal.getAvgScore( req.query.rating, function( err, result ) {
-        res.render('have/haveAvgScore', { 'result':result });
-    });
-
-});
-
-router.get('/top10', function( req, res ) {
-
-    movie_dal.getTop10( function( err, result ) {
-        res.render('have/haveAvgScore', { 'result':result });
-    });
-
 });
 
 router.get('/edit', function(req, res){

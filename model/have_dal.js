@@ -200,7 +200,7 @@ exports.insert = function(params, callback) {
 
 exports.insertW = function(params, callback) {
 
-    // FIRST INSERT THE COMPANY
+
     var query = 'INSERT INTO ygo_card (Card_Name, Card_Set, Card_No, Card_Rarity, Card_Type, Card_Type_Full, Attack, ' +
         'Defense, Card_Description, Image, TCG_Player) values (?)';
 
@@ -305,7 +305,7 @@ exports.delete = function(Card_ID, callback) {
 
 };
 
-/*
+/* More practical to use delete, as a card on the wishlist is most likely already not in your owned list
 exports.deleteW = function(Card_ID, callback) {
     var query = 'DELETE FROM ygo_wishlist WHERE Card_ID = ?';
     var queryData = [Card_ID];

@@ -35,7 +35,6 @@ module.exports.stringParser = stringParser;
 
 exports.marketPrice = function(params, callback) {
 
-    //All the web scraping magic will happen here
     var url = params.TCG_Player;
 
 
@@ -71,7 +70,8 @@ exports.marketPrice = function(params, callback) {
 
 exports.urlAdd = function(params, callback) {
 
-    //All the web scraping magic will happen here
+    // All the web scraping magic will happen here
+    // This often changes as the TCG Player site updates
 
     var url = params.url;
 

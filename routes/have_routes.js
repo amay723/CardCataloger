@@ -23,7 +23,7 @@ router.get('/search', function(req, res) {
 
 });
 
-// View All have
+// View All Cards
 router.get('/all', function(req, res) {
 
     var page = parseInt(req.query.Page);
@@ -47,7 +47,7 @@ router.get('/all', function(req, res) {
 
 });
 
-// View the company for the given id
+// View Card by ID
 router.get('/', function(req, res){
     if(req.query.Card_ID == null) {
         res.send('Card_ID is null');
@@ -65,9 +65,8 @@ router.get('/', function(req, res){
 });
 
 
-// Return the add a new company form
+// Manually add a new card
 router.get('/add', function(req, res){
-    // passing all the query parameters (req.query) to the insert function instead of each individually
 
     have_dal.getAdd( function(err, result) {
         if(err) {
@@ -81,7 +80,6 @@ router.get('/add', function(req, res){
 });
 
 router.get('/addByURL', function(req, res){
-    // passing all the query parameters (req.query) to the insert function instead of each individually
 
     scraper.urlAdd(req.query, function(err, result) {
         if( err ) {
@@ -96,7 +94,6 @@ router.get('/addByURL', function(req, res){
 });
 
 router.get('/wishlistAdd', function(req, res){
-    // passing all the query parameters (req.query) to the insert function instead of each individually
 
     have_dal.getAdd( function(err, result) {
         if( err ) {
@@ -155,9 +152,10 @@ router.get('/wishlistAll', function(req, res) {
     });
 });
 
-// View the company for the given id
+// Submit a new card
 router.post('/insert', function(req, res) {
-    // simple validation
+
+    // Check if all fields were filled
     if (req.body.Card_Name == "") {
         res.send('Card Name must be provided.');
     }
@@ -180,7 +178,8 @@ router.post('/insert', function(req, res) {
         res.send('Set name must be provided');
     }
     else {
-        // passing all the query parameters (req.body) to the insert function instead of each individually
+
+        // Defauly Image if none found
         if (req.body.Image == "") {
             req.body.Image = 'http://i.tcgplayer.com/0_200w.jpg';
         }
@@ -208,8 +207,10 @@ router.post('/insert', function(req, res) {
     }
 });
 
+// Insert into Wishlist
 router.post('/insertW', function(req, res) {
-    // simple validation
+
+    // Check if all fields were filled
     if (req.body.Card_Name == "") {
         res.send('Card Name must be provided.');
     }
@@ -226,7 +227,8 @@ router.post('/insertW', function(req, res) {
         res.send('Description must be provided');
     }
     else {
-        // passing all the query parameters (req.body) to the insert function instead of each individually
+
+        // Default Image if none given
         if (req.body.Image == "") {
             req.body.Image = 'http://i.tcgplayer.com/0_200w.jpg';
         }
@@ -250,6 +252,7 @@ router.post('/insertW', function(req, res) {
     }
 });
 
+// Decrement number of particular card owned
 router.get('/decAmt', function( req, res ) {
 
     if( req.query.Card_ID == null ) {
@@ -274,6 +277,7 @@ router.get('/decAmt', function( req, res ) {
     }
 });
 
+// Increment number of particular card owned
 router.get('/incAmt', function( req, res ) {
 
     if( req.query.Card_ID == null ) {
@@ -298,6 +302,7 @@ router.get('/incAmt', function( req, res ) {
     }
 });
 
+// Move card from Wishlist to Owned list
 router.post('/addToOwned', function( req, res ) {
 
     if( req.body.Card_ID == null ) {
@@ -366,7 +371,7 @@ router.post('/update', function(req, res) {
     });
 });
 
-// Delete a company for the given company_id
+// Delete a particular card
 router.get('/delete', function(req, res){
     if(req.query.Card_ID == null) {
         res.send('Card_ID is null');
@@ -384,6 +389,7 @@ router.get('/delete', function(req, res){
     }
 });
 
+// Delete a particular card from the wishlist
 router.get('/deleteW', function(req, res){
     if(req.query.Card_ID == null) {
         res.send('Card_ID is null');

@@ -157,30 +157,9 @@ exports.update = function(params, callback) {
     var queryData = [params.Set_ID, params.Set_Name, params.oldSet_ID];
 
     connection.query(query, queryData, function(err, result) {
-        //delete company_address entries for this company
         callback(err, result);
     });
 };
-
-/*  Stored procedure used in this example
-     DROP PROCEDURE IF EXISTS company_getinfo;
-
-     DELIMITER //
-     CREATE PROCEDURE company_getinfo (company_id int)
-     BEGIN
-
-     SELECT * FROM company WHERE company_id = _company_id;
-
-     SELECT a.*, s.company_id FROM address a
-     LEFT JOIN company_address s on s.address_id = a.address_id AND company_id = _company_id;
-
-     END //
-     DELIMITER ;
-
-     # Call the Stored Procedure
-     CALL company_getinfo (4);
-
- */
 
 exports.edit = function(Set_ID, callback) {
     var query = 'SELECT * FROM ygo_set WHERE Set_ID = ?';
