@@ -1,0 +1,15 @@
+<%- include("../includes/header.ejs", {title:"Add New Set"}); %>
+    <h1>Add New Set</h1>
+    <form action="/sets/insert" method="post">
+        <br />
+        Set ID: <input id="Set_ID" name="Set_ID" type="text" />
+        <br />
+        <br />
+        Set Name: <input id="Set_Name" name="Set_Name" type="text" />
+
+        <br />
+        <br />
+        <input type="submit" />
+
+    </form>
+<%- include("../includes/footer.ejs"); %>

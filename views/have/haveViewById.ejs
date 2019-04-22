@@ -1,0 +1,38 @@
+<%- include("../includes/header.ejs", {title:"Card - " + result.Card_Name}); %>
+    <h1>Card View</h1>
+    <nav style="max-width: 230px">
+        <img src="<%= result.Image %>" />
+    </nav>
+
+
+    <article style="padding-left: 35px">
+
+    <h2> <u><%= result.Card_Name %></u> </h2>
+
+    <ul>
+        <li><b>Set Name:</b> <a href="/sets/?Set_ID=<%= result.Card_Set %>"><%= result.Set_Name %> </a> </li>
+        <li><b>Number:</b> <%= result.Card_Set + '-' + result.Card_No %></li>
+        <li><b>Rarity:</b> <%= result.Card_Rarity %></li>
+        <li><b>Card Type:</b> <%= result.Card_Type_Full %></li>
+        <% if( result.Card_Type == 'Monster' ) { %>
+        <li><b>A / D:</b> <%= result.Attack + ' / ' + result.Defense %></li>
+        <% } %>
+        <li style="margin-right: 450px"><b>Description:</b> <%= result.Card_Description %></li>
+        <% if( result.Amount != null ) { %>
+        <li><b>Amount:</b> <%= result.Amount %></li>
+        <% } %>
+        <% if( result.Notes != null && result.Notes != "" ) { %>
+        <li><b>Notes:</b> <%= result.Notes %></li>
+        <% } %>
+        <li> <a href="<%= result.TCG_Player %>" target="_blank">TCG Player Shop</a> </li>
+
+    </ul>
+        <br />
+        <br />
+    <a href="/have/all"><< back</a>
+
+    </article>
+
+
+
+<%- include("../includes/footer.ejs"); %>

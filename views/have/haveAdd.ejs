@@ -1,0 +1,63 @@
+<%- include("../includes/header.ejs", {title:"Add New Card"}); %>
+    <h1>Add New Owned Card</h1>
+    <form action="/have/insert" method="post">
+        <br />
+        Card Name: <input id="Card_Name" name="Card_Name" type="text" />
+        <br />
+        <br />
+        Card Set:
+        <select id="Card_Set" name="Card_Set" >
+            <% for( var i = 0; i < sets.length; i++ ) { %>
+            <option value="<%= sets[i].Set_ID %>"> <%= sets[i].Set_Name %></option>
+            <% } %>
+        </select>
+        Card Number: <input id="Card_No" name="Card_No" type="text" />
+        <br />
+        <br />
+        Card Rarity:
+        <select id="Card_Rarity" name="Card_Rarity" >
+            <% for( var j = 0; j < rarity.length; j++ ) { %>
+            <option value="<%= rarity[j].Rarity %>"> <%= rarity[j].Rarity %></option>
+            <% } %>
+        </select>
+        <br />
+        <br />
+        Card Type:
+        <select id="Card_Type" name="Card_Type" >
+            <% for( var k = 0; k < type.length; k++ ) { %>
+            <option value="<%= type[k].Type %>"> <%= type[k].Type %></option>
+            <% } %>
+        </select>
+        <br />
+        <br />
+        Card Type Full: <input id="Card_Type_Full" name="Card_Type_Full" type="text" />
+        <br />
+        <br />
+        Attack: <input id="Attack" name="Attack" type="text" />
+        Defense: <input id="Defense" name="Defense" type="text" />
+        <br />
+        <br />
+        Description: <input id="Card_Description" name="Card_Description" type="text"/>
+        <br />
+        <br />
+        Amount: <input id="Amount" name="Amount" type="number" value="1" />
+        <br />
+        <br />
+        Image URL: <input id="Image" name="Image" type="url" />
+        TCG Player URL: <input id="TCG_Player" name="TCG_Player" type="url" />
+        <br />
+        <br />
+        Notes: <input id="Notes" name="Notes" type="text"/>
+
+        <br />
+        <br />
+        <input type="submit" />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+    </form>
+<%- include("../includes/footer.ejs"); %>

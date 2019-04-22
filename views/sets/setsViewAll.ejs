@@ -1,0 +1,99 @@
+<%- include("../includes/header.ejs", {title:"Sets - View All"}); %>
+
+<h1>Yu-Gi-Oh Sets</h1>
+
+<% if(locals.was_successful) { %>
+<div class="col-md-12">
+    <div id="message" class="alert alert-success col-md-4">
+        <%= news %> was successfully added. %>
+    </div>
+</div>
+<% }
+else if( locals.update_successful) { %>
+<div class="col-md-12">
+    <div id="message" class="alert alert-success col-md-4">
+        <%= news %> was successfully updated. %>
+    </div>
+</div>
+<% }
+else if( err ) { %>
+<div class="col-md-12">
+    <div id="message" class="alert alert-success col-md-4">
+        Database Connection Error:
+        <br />
+        <%= err %>
+    </div>
+</div>
+<% } %>
+
+<nav>
+    <ul>
+        <li><a href="/"><u>Home</u></a></li>
+        <br />
+        <li>
+            <a href="/have/home">Yu-Gi-Oh!</a>
+            <ul style="padding-left: 20px; list-style-type:circle; font-size: x-small">
+                <li><a href="/have/all">View Owned Cards</a></li>
+                <li><a href="/have/wishlistAll">View Wishlist</a></li>
+                <li><a href="/sets/all">View Sets</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<article>
+    <a href="/sets/add"><u>Add New Set</u></a> <br />
+
+        <form action="/sets/search" method="get">
+            <br />
+            Search Sets <input id="set_search" name="set_search" type="text"/>
+            <input type="submit" />
+        </form>
+
+        <br />
+
+        <br />
+
+        <% if( err ) { %>
+        Database Connection Error
+        <% }
+        else { %>
+            <table border="1">
+                <tr>
+                    <th style="padding-left:20px; padding-right:20px">Set ID</th>
+                    <th style="padding-left:20px; padding-right:20px">Set Name</th>
+                    <th style="padding-left:20px; padding-right:20px">Cards</th>
+                    <th style="padding-left:5px; padding-right:5px">Actions</th>
+                </tr>
+                <% for(var i=0; result.length > i; i++ ) { %>
+                <tr name="<%= result[i].Set_ID %>" id="<%= result[i].Set_ID%>">
+                    <td style="padding-left:10px"> <%= result[i].Set_ID %> </td>
+                    <td style="padding-left:5px; padding-right:5px"> <a href="/sets/?Set_ID=<%=result[i].Set_ID%>"><%= result[i].Set_Name %></a> </td>
+                    <td style="padding-left:35px"> <b><%= result[i].Total %></b> </td>
+
+                    <td>
+                        <button onclick="event.preventDefault();window.location.href='/sets/edit/?Set_ID=<%=result[i].Set_ID%>'">Edit</button>
+                        <!--
+                        <form action="/sets/delete/" style="display:inline;">
+                            <input type="hidden" name="Set_ID" id="Set_ID" value="<= result[i].Set_ID >" />
+                            <input style="padding-right:25px; padding-left:25px;" type="submit" value="X" onclick="clicked(event)"/>
+                        </form>
+
+                        <script>
+                            function clicked(e)
+                            {
+                                if(!confirm('Are you sure you want to delete this set? This also deletes every card in the set.'))e.preventDefault();
+                            }
+                        </script>
+                        -->
+                    </td>
+                </tr>
+                <% } %>
+            </table>
+        <% } %>
+
+    <br />
+    <br />
+    <br />
+    <br />
+</article>
+<%- include("../includes/footer.ejs"); %>

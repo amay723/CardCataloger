@@ -1,0 +1,55 @@
+<%- include("../includes/header.ejs", {title:"Cards Owned - View All"}); %>
+
+<h1>Owned Cards</h1>
+<nav>
+    <ul>
+        <li><a href="/"><u>Home</u></a></li>
+        <br />
+        <li>
+            <a href="/have/home">Yu-Gi-Oh!</a>
+            <ul style="padding-left: 20px; list-style-type:circle; font-size: x-small">
+                <li><a href="/have/all?Page=1">View Owned Cards</a></li>
+                <li><a href="/have/wishlistAll">View Wishlist</a></li>
+                <li><a href="/sets/all">View Sets</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<article>
+    <a href="/have/add"><u>Add New Owned Card</u></a> &#9; &ndash; &#9; <a href="/have/wishlistAdd"><u>Add New Wishlist Card</u></a>
+    <br />
+    <form action="/have/addByURL" method="get">
+        <input type="hidden" id="ins" name="ins" value="0" />
+        Add Card By URL (TCG Player): <input id="url" name="url" type="url" />
+        <input type="submit" />
+    </form>
+    <br />
+    <br />
+    <br />
+
+    <a href="/have/all?Page=1" style="font-size: large">View All Owned Cards</a>
+
+    <br />
+
+
+    <form action="/have/search" method="get">
+
+        Search owned cards <input id="have_search" name="have_search" type="text" />
+        <input type="submit" />
+    </form>
+    <br />
+    <br />
+    <a href="/have/wishlistAll" style="font-size: large">View Cards on Wishlist</a>
+    <br />
+    <br />
+    <br />
+
+    <a href="/sets/all">View All Sets</a>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+</article>
+<%- include("../includes/footer.ejs"); %>

@@ -1,0 +1,100 @@
+<%- include("../includes/header.ejs", {title:"Owned Cards - View All"}); %>
+
+<h1>Owned Cards</h1>
+
+<% if(locals.was_successful) { %>
+<div class="col-md-12">
+    <div id="message" class="alert alert-success col-md-4">
+        <%= newc %> was successfully added. %>
+    </div>
+</div>
+<% }%>
+
+<nav>
+    <ul>
+        <li><a href="/"><u>Home</u></a></li>
+        <br />
+        <li>
+            <a href="/have/home">Yu-Gi-Oh!</a>
+            <ul style="padding-left: 20px; list-style-type:circle; font-size: x-small">
+                <li><a href="/have/all">View Owned Cards</a></li>
+                <li><a href="/have/wishlistAll">View Wishlist</a></li>
+                <li><a href="/sets/all">View Sets</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+<article>
+    <a href="/have/add"><u>Add New Owned Card</u></a> <br />
+
+    <form action="/have/search" method="get">
+        <br />
+        Search <input id="have_search" name="have_search" type="text"/>
+        <input type="submit" />
+    </form>
+
+
+
+    <% if( result.length == 0 ) { %>
+        No cards found :(
+    <% }
+    else { %>
+
+
+    <h2>
+        <u><%=result[0].Set_Name%></u>
+    </h2>
+
+    <br />
+
+    Total Cards: <%= result.length %>, Total Owned: <%= sum %>
+    <br />
+    <table border="1">
+        <tr>
+            <th style="padding-left:20px; padding-right:20px">Image</th>
+            <th style="padding-left:20px; padding-right:20px">Card Name</th>
+            <th style="padding-left:20px; padding-right:20px">Number</th>
+            <th style="padding-left:70px; padding-right:70px">Set Name</th>
+            <th style="padding-left:7px; padding-right:7px">Amount</th>
+            <th style="padding-left:5px; padding-right:5px">Actions</th>
+        </tr>
+        <% for(var i=0; result.length > i; i++ ) { %>
+        <tr name="<%= result[i].Card_ID %>" id="<%= result[i].Card_ID%>">
+            <td><a href="/have/?Card_ID=<%= result[i].Card_ID %>"><img src="<%= result[i].Image %>" width="100" height="142" /></a></td>
+            <td style="padding-left:5px"><a href="/have/?Card_ID=<%= result[i].Card_ID %>"><%= result[i].Card_Name %></a></td>
+            <td style="padding-left:10px"> <%= result[i].Card_Set + '-' + result[i].Card_No %> </td>
+            <td style="padding-left:5px; padding-right:5px"> <%= result[i].Set_Name %> </td>
+            <td style="padding-left:22px; padding-right:22px">
+                <a href="/have/decAmt/?Card_ID=<%=result[i].Card_ID%>">-</a>
+                <b><%= result[i].Amount %></b>
+                <a href="/have/incAmt/?Card_ID=<%=result[i].Card_ID%>">+</a>
+            </td>
+
+
+            <td>
+                <button onclick="event.preventDefault();window.location.href='/have/edit/?Card_ID=<%=result[i].Card_ID%>'">Edit</button>
+                <form action="/have/delete/" style="display:inline;">
+                    <input type="hidden" name="Card_ID" id="Card_ID" value="<%= result[i].Card_ID %>" />
+                    <input style="padding-top:61px; padding-bottom:61px; padding-right:25px; padding-left:25px;" type="submit" value="X" onclick="clicked(event)"/>
+                </form>
+
+                <script>
+                    function clicked(e)
+                    {
+                        if(!confirm('Are you sure you want to delete this card?'))e.preventDefault();
+                    }
+                </script>
+
+            </td>
+        </tr>
+        <% } %>
+    </table>
+
+    <% } %>
+
+    <br />
+    <br />
+    <br />
+    <br />
+</article>
+<%- include("../includes/footer.ejs"); %>

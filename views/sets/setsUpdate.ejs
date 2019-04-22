@@ -1,0 +1,16 @@
+<%- include("../includes/header.ejs", {title:"Update Set"}); %>
+    <h1>Update Set '<%=result.Set_Name%>'</h1>
+    <form action="/sets/update" method="post">
+        <input type="hidden" name="oldSet_ID" id="oldSet_ID" value="<%= result.Set_ID %>" />
+        <br />
+        Set ID: <input id="Set_ID" name="Set_ID" type="text" value="<%=result.Set_ID%>" />
+        <br />
+        <br />
+        Set Name: <input id="Set_Name" name="Set_Name" type="text" value="<%=result.Set_Name%>" />
+
+        <br />
+        <br />
+        <input type="submit" />
+
+    </form>
+<%- include("../includes/footer.ejs"); %>

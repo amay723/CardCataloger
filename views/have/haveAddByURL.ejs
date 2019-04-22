@@ -1,0 +1,36 @@
+<%- include("../includes/header.ejs", {title:"Add New Card"}); %>
+
+
+<h1>Add New Card By URL</h1>
+
+<% if( ins == "1" ) { %>
+<form action="/have/insertW" method="post">
+<% } else { %>
+<form action="/have/insert" method="post">
+<% } %>
+
+    <br />
+    <input id="Card_Name" name="Card_Name" type="hidden" value="<%= result.Card_Name %>" />
+    <input id="Card_Set" name="Card_Set" type="hidden" value="<%= result.Card_Set %>" />
+    <input id="Card_No" name="Card_No" type="hidden" value="<%= result.Card_No %>" />
+    <input id="Card_Rarity" name="Card_Rarity" type="hidden" value="<%= result.Card_Rarity %>" />
+    <input id="Card_Type" name="Card_Type" type="hidden" value="<%= result.Card_Type %>" />
+    <input id="Card_Type_Full" name="Card_Type_Full" type="hidden" value="<%= result.Card_Type_Full %>" />
+    <input id="Attack" name="Attack" type="hidden" value="<%= result.Attack %>" />
+    <input id="Defense" name="Defense" type="hidden" value="<%= result.Defense %>" />
+    <input id="Card_Description" name="Card_Description" type="hidden" value="<%= result.Card_Description %>" />
+    <input id="Image" name="Image" type="hidden" value="<%= result.Image %>" />
+    <input id="TCG_Player" name="TCG_Player" type="hidden" value="<%= result.TCG_Player %>" />
+    <input id="Set_Name" name="Set_Name" type="hidden" value="<%= result.Set_Name %>" />
+    <input id="Amount" name="Amount" type="hidden" value="1" />
+    <br />
+    <input type="submit" />
+
+    <script>
+        $(document).find('input').click()
+    </script>
+
+
+</form>
+
+<%- include("../includes/footer.ejs"); %>

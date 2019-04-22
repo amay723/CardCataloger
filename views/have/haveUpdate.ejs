@@ -1,0 +1,87 @@
+<%- include("../includes/header.ejs", {title:"Update Card"}); %>
+    <h1>Update Card</h1>
+    <form action="/have/update" method="post">
+
+        <input type="hidden" name="Card_ID" id="Card_ID" value="<%= result.Card_ID %>" />
+
+        <br />
+        Card Name: <input id="Card_Name" name="Card_Name" type="text" value="<%=result.Card_Name%>" />
+        <br />
+        <br />
+        Card Set:
+        <select id="Card_Set" name="Card_Set" >
+            <% for( var i = 0; i < sets.length; i++ ) {
+
+                var selected = "";
+
+                if(sets[i].Set_ID == result.Card_Set) {
+                    selected = "selected";
+                }
+            %>
+            <option value="<%= sets[i].Set_ID %>" <%= selected %>> <%= sets[i].Set_Name %></option>
+            <% } %>
+        </select>
+        Card Number: <input id="Card_No" name="Card_No" type="text" value="<%=result.Card_No%>" />
+        <br />
+        <br />
+        Card Rarity:
+        <select id="Card_Rarity" name="Card_Rarity" >
+            <% for( var j = 0; j < rarity.length; j++ ) {
+
+                selected = "";
+
+                if(rarity[j].Rarity == result.Card_Rarity) {
+                    selected = "selected";
+                }
+            %>
+            <option value="<%= rarity[j].Rarity %>" <%= selected %> > <%= rarity[j].Rarity %></option>
+            <% } %>
+        </select>
+        <br />
+        <br />
+        Card Type:
+        <select id="Card_Type" name="Card_Type" >
+            <% for( var k = 0; k < type.length; k++ ) {
+
+                selected = "";
+
+                if(type[k].Type == result.Card_Type) {
+                    selected = "selected";
+                }
+            %>
+            <option value="<%= type[k].Type %>" <%= selected %> > <%= type[k].Type %></option>
+            <% } %>
+        </select>
+        <br />
+        <br />
+        Card Type Full: <input id="Card_Type_Full" name="Card_Type_Full" type="text" value="<%=result.Card_Type_Full%>" />
+        <br />
+        <br />
+        Attack: <input id="Attack" name="Attack" type="text" value="<%=result.Attack%>" />
+        Defense: <input id="Defense" name="Defense" type="text" value="<%=result.Defense%>" />
+        <br />
+        <br />
+        Description: <input id="Card_Description" name="Card_Description" type="text" value="<%=result.Card_Description%>" />
+        <br />
+        <br />
+        Amount: <input id="Amount" name="Amount" type="number" value="<%=result.Amount%>" />
+        <br />
+        <br />
+        Image URL: <input id="Image" name="Image" type="url" value="<%=result.Image%>" />
+        TCG Player URL: <input id="TCG_Player" name="TCG_Player" type="url" value="<%=result.TCG_Player%>" />
+        <br />
+        <br />
+        Notes: <input id="Notes" name="Notes" type="text" value="<%=result.Notes%>"/>
+
+        <br />
+        <br />
+        <input type="submit" />
+
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
+    </form>
+<%- include("../includes/footer.ejs"); %>
